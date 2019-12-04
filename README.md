@@ -1,5 +1,5 @@
 # wordsquirt ✒️💦
- Python based text snippet expander for macos. My grandfather used to call writing implements "word squirters". Written in Python for macOS.
+ Python3 based text snippet expander for macos. My grandfather used to call writing implements "word squirters". Written in Python for macOS.
 
 ## Python Package requirements (one day I'll learn to package my software):
 

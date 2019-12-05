@@ -19,11 +19,11 @@ Current iteration is from scratch.
 ## Set up
 Compile with:
 
-``py2applet --make-setup wordsquirt/wordsquirt.py``
+``python setup.py py2app``
 
 Then run the resulting app. Since this program monitors and controls the keyboard you will need to give it Keyboard Monitoring and Accessibility permissions when macOS prompts. On my machine I get what appear to be errors about missing modules during build but an app is still produced and runs fine.
 
-Also in my experience, when using rumps and pynput together the app would crash when it would attempt to control the keyboard. Works as expected when compiled and run as a .app. On that note, I also had to delete and manually regrant Accessibility and Keyboard Monitoring whenever I made a new build. Otherwise the expansion wouldn't trigger, with no apparent errors.
+When running the program as a script, the program crashes whenever it attempts to send key presses. However, it works as intended when compiled as app using py2app. On that note, I also had to delete and manually regrant Accessibility and Keyboard Monitoring whenever I made a new build. Otherwise the expansion wouldn't trigger, with no apparent errors.
 
 ## Todo:
 - Implement drop down menu to delete existing expansions.

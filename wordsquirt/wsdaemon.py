@@ -2,6 +2,7 @@ from pynput import keyboard
 from tinydb import TinyDB, Query
 from os.path import expanduser
 from time import sleep
+from cheatsheetgenerator import CheatSheetGenerator
 
 
 #
@@ -15,6 +16,7 @@ class WSDaemon():
         self.buffer_limit = int(options['buffer_limit'])
         self.expansion_file = options['expansion_file']
         self.trigger_prefix = options['trigger_prefix']
+        self.cheatsheet_file = options['cheatsheet_file']
         self.expansion_arr = []
         self.db_handle = TinyDB(self.expansion_file, sort_keys=True, indent=1)
         self.load_keywords()
@@ -54,6 +56,8 @@ class WSDaemon():
         for row in iter(self.db_handle):
             self.expansion_arr.append(row)
 
+        self.create_cheatsheet()
+
     def save_expansion(self, trigger, expansion):
         if not self.validate_unique_trigger(trigger):
             return False
@@ -81,3 +85,13 @@ class WSDaemon():
 
         for char in expansion:
             self.kb_controller.press(char)
+
+    def create_cheatsheet(self):
+        cs_generator = CheatSheetGenerator(self.cheatsheet_file)
+        for expansion in self.expansion_arr:
+
+            trigger = expansion["trigger"]
+            text = expansion["text"]
+            cs_generator.add_entry(trigger, text)
+
+        cs_generator.write_output()

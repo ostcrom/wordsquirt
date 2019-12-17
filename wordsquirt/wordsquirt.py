@@ -7,13 +7,15 @@ CONFIG_LOCATION = path.expanduser("~/.wordsquirtconf")
 DEFAULT_OPTIONS = {
 'expansion_file' : path.expanduser("~/.wordsquirt"),
 'trigger_prefix' : ',,',
-'buffer_limit' : 10
+'buffer_limit' : 10,
+'cheatsheet_file' : path.expanduser("~/.wordsquirt_cheatsheet.html")
 }
 APP_TITLE = "✒️💦"
 ADD_EX_LABEL = "Add New Text Expansion"
 EDIT_EX_LABEL = "Edit Expansion File"
 RELOAD_EX_LABEL = "Reload Expansion File"
 EDIT_CONF_LABEL = "Edit Config File"
+VIEW_CS_LABEL = "View Expansion Cheat Sheet"
 
 class WordSquirt(rumps.App):
     def __init__(self):
@@ -43,9 +45,8 @@ class WordSquirt(rumps.App):
 
     @rumps.clicked(EDIT_EX_LABEL)
     def edit_expansions(self, _):
-        target = self.config_obj['options']['expansion_file']
+        target = self.wsdaemon.expansion_file
         system(f"open {target}")
-
 
     @rumps.clicked(EDIT_CONF_LABEL)
     def edit_preferences(self, _):
@@ -54,8 +55,11 @@ class WordSquirt(rumps.App):
     @rumps.clicked(RELOAD_EX_LABEL)
     def reload_expansions(self, _):
         self.wsdaemon.load_keywords()
-        rumps.alert("Expansions reloaded.")
 
+    @rumps.clicked(VIEW_CS_LABEL)
+    def view_cheatsheet(self, _):
+        target = self.wsdaemon.cheatsheet_file
+        system(f"open {target}")
     def load_options(self):
         if not path.exists(CONFIG_LOCATION):
             self.set_option_defaults()
@@ -76,6 +80,12 @@ class WordSquirt(rumps.App):
 
         with open(CONFIG_LOCATION, 'w') as configfile:
             self.config_obj.write(configfile)
+
+    def populate_del_menu(self):
+        triggers = self.wsdaemon.expansion_arr.copy()
+
+
+
 
 if __name__ == "__main__":
     WordSquirt().run()

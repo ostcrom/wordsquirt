@@ -18,8 +18,17 @@ class WSDaemon():
         self.trigger_prefix = options['trigger_prefix']
         self.cheatsheet_file = options['cheatsheet_file']
         self.expansion_arr = []
-        self.db_handle = TinyDB(self.expansion_file, sort_keys=True, indent=1)
         self.load_keywords()
+
+    def init_db(self):
+        ##Try to close DB, then load a new copy.
+        try:
+            self.db_handle.close()
+        except:
+            pass
+
+        self.db_handle = TinyDB(self.expansion_file, sort_keys=True, indent=1)
+
 
     def start(self):
         self.kb_listener.start()
@@ -52,10 +61,12 @@ class WSDaemon():
                 ##However, in practice it doesn't seem to cause an issue.
 
     def load_keywords(self):
+        self.init_db()
         del self.expansion_arr[:]
-        for row in iter(self.db_handle):
-            self.expansion_arr.append(row)
 
+        for row in iter(self.db_handle):
+
+            self.expansion_arr.append(row)
         self.create_cheatsheet()
 
     def save_expansion(self, trigger, expansion):

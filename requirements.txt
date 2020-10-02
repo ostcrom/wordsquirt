@@ -1,0 +1,4 @@
+tinydb
+rumps
+pynput
+py2app

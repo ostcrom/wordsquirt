@@ -1,10 +1,10 @@
 # wordsquirt ✒️💦
- Python3 based text shortcut expander for macos. My grandfather used to call writing implements "word squirters". This program monitors your keyboard input until you type a trigger and keyword. Then wordsquirt erases the keyword you just typed and replaces it with your predefined text. Written in python3 for macOS.
+ Python3 based text shortcut expander for macos. My grandfather used to call writing implements "word squirters". This program monitors your keyboard input until you type a trigger and keyword. Then wordsquirt erases the keyword you just typed and replaces it with your predefined text. 
 
 ## Requirements:
-Recent masOS with python3 installed. I recommend using the official python3 macOS install ( https://www.python.org/downloads/ ), I had issues building with homebrew provided python3.
+Recent masOS with python3 installed. I recommend using the official installer ( https://www.python.org/downloads/ ), I had issues building with homebrew provided python3.
 
-##Install Instructions:
+## Install Instructions:
 
 This repo includes the source code for wordsquirt, and a script which will build and install the app to your /Applications folder.
 

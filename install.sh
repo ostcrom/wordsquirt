@@ -9,6 +9,7 @@ if [ $? -ne 0 ]; then
   echo "**********************************************"
   echo "Build failed, please review output for error!"
   echo "**********************************************"
+  exit $?
 fi;
 
 mv dist/wordsquirt.app /Applications/wordsquirt.app
@@ -21,4 +22,5 @@ else
   echo "**********************************************"
   echo "Install failed, please review output for error!"
   echo "**********************************************"
+  exit $?
 fi
